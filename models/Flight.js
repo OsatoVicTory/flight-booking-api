@@ -1,1 +1,1 @@
-exports.exampleModel = [];
+exports.exampleModel = ["id","title","time","price","date"];
