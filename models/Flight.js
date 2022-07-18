@@ -1,1 +1,0 @@
-exports.exampleModel = ["id","title","time","price","date"];
