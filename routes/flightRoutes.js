@@ -15,15 +15,15 @@ const arr = {
 router.get("/", (req, res) => {
 
     let DB = JSON.parse(fs.readFileSync("flight.json", "utf8"));
-    res.send({ "message" : DB });
+    res.status(200).json({ "message" : DB });
 })
 
 router.get("/:id", (req, res) => {
 
     let DB = JSON.parse(fs.readFileSync("flight.json", "utf8"));
     const data = controller.findInJsonDB(DB, req.params.id)
-    if(data) res.send({ "message": data });
-    else res.send({ "message": "No Flight like this" })
+    if(data) res.status(200).json({ "message": data });
+    else res.status(404).json({ "message": "No Flight like this" })
 })
 
 //post
@@ -37,10 +37,10 @@ router.post("/add", (req, res) => {
 
     fs.writeFile("flight.json", jsonData, function (err) {
         if(err) {
-            return res.send({ "message": err })
+            return res.status(500).json({ "message": err })
         }
 
-        res.send({ "message": "Flight added successfully" });
+        res.status(200).json({ "message": "Flight added successfully" });
     })
 });
 
@@ -53,10 +53,10 @@ router.put("/update/:id", (req, res) => {
 
     fs.writeFile("flight.json", jsonData, function (err) {
         if(err) {
-            return res.send({ "message": err })
+            return res.status(500).json({ "message": err })
         }
 
-        res.send({ "message": "Flight updated successfully" });
+        res.status(200).json({ "message": "Flight updated successfully" });
     })
 })
 
@@ -69,10 +69,10 @@ router.delete("/delete/:id", (req, res) => {
 
     fs.writeFile("flight.json", jsonData, function (err) {
         if(err) {
-            return res.send({ "message": err })
+            return res.status(500).json({ "message": err })
         }
 
-        res.send({ "message": "Flight deleted successfully" });
+        res.status(200).json({ "message": "Flight deleted successfully" });
     })
 })
 
